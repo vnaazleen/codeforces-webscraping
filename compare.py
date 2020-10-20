@@ -2,7 +2,7 @@
 """
 Created on Tue Oct 20 19:20:05 2020
 
-@author: dell
+@author: Vaseem Naazleen Shaik
 """
 import requests
 import json
