@@ -65,28 +65,15 @@ class User:
         time = []
         for rating in ratings_json['result'][1:]:
             user_ratings.append(rating["newRating"])
-            time.append(rating["ratingUpdateTimeSeconds"])
             
-        time = [datetime.fromtimestamp(t) for t in time]
-        time = [t.strftime("%B-%d") for t in time]
-        time = [t[0:3]+t[t.index('-'):] for t in time]
-        
-        if len(user_ratings) > 50:
-            user_ratings = user_ratings[-55:]
-            time = time[-55:]
-            
-        user_ratings = np.array(user_ratings)
-        time = np.array(time)
 
-        plt.figure(figsize=(len(user_ratings), len(user_ratings)//2))
-        plt.plot(time,user_ratings, marker="o")
+        plt.figure(figsize=(len(user_ratings)//2, len(user_ratings)//5))
+        plt.plot(user_ratings, marker="o")
         plt.title(self.name + "'s Ratings")
         
 
 if __name__ == "__main__":
-    username = input()
+    username = "tourist" #input()
     user = User(username)
     user.about()
     user.ratings()
-        
-        
