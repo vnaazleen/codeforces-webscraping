@@ -71,9 +71,6 @@ class User:
         time = [t.strftime("%B-%d") for t in time]
         time = [t[0:3]+t[t.index('-'):] for t in time]
         
-        if len(user_ratings) > 25:
-            user_ratings = user_ratings[-25:]
-            time = time[-25:]
             
         user_ratings = np.array(user_ratings)
         time = np.array(time)
