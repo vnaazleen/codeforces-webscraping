@@ -71,14 +71,14 @@ class User:
         time = [t.strftime("%B-%d") for t in time]
         time = [t[0:3]+t[t.index('-'):] for t in time]
         
-        if len(user_ratings) > 25:
-            user_ratings = user_ratings[-25:]
-            time = time[-25:]
+        if len(user_ratings) > 50:
+            user_ratings = user_ratings[-55:]
+            time = time[-55:]
             
         user_ratings = np.array(user_ratings)
         time = np.array(time)
 
-        plt.figure(figsize=(len(user_ratings),5))
+        plt.figure(figsize=(len(user_ratings), len(user_ratings)//5))
         plt.plot(time,user_ratings, marker="o")
         plt.title(self.name + "'s Ratings")
         
