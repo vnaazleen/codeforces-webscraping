@@ -78,7 +78,7 @@ class User:
         user_ratings = np.array(user_ratings)
         time = np.array(time)
 
-        plt.figure(figsize=(len(user_ratings), len(user_ratings)//5))
+        plt.figure(figsize=(len(user_ratings), len(user_ratings)//2))
         plt.plot(time,user_ratings, marker="o")
         plt.title(self.name + "'s Ratings")
         
