@@ -16,10 +16,39 @@ from datetime import datetime
 
 
 class User:
-    def ratings(self, name):
+    def __init__(self, name):
+        self.name = name
+        
+    def about(self):
+        url = "https://codeforces.com/api/user.info?handles="
+        url += self.name
+        
+        response = requests.get(url, timeout=5)
+        
+        if response.status_code != 200:
+            print("Bad Response: " + str(response.status_code))
+            return
+        
+        user_json = json.loads(response.text)
+        
+        data = {}
+        for i in user_json['result']:
+            data['Handle'] = i['handle']
+            data['Name'] = i['lastName']
+            data['Country'] = i['country']
+            data['Rank']= i['rank']
+            data['Rating'] = i['rating']
+            data['Max Rating'] = i["maxRating"] 
+            
+        user_info = pd.Series(data)
+        print(user_info)        
+        
+              
+        
+    def ratings(self):
         # Code Forces API for getting ratings list
         url = "https://codeforces.com/api/user.rating?handle=" 
-        url += name
+        url += self.name
         
         response = requests.get(url, timeout=5)
         
@@ -51,12 +80,13 @@ class User:
 
         plt.figure(figsize=(len(user_ratings),5))
         plt.plot(time,user_ratings, marker="o")
-        plt.title(name + "'s Ratings")
+        plt.title(self.name + "'s Ratings")
         
 
 if __name__ == "__main__":
-    user = User()
     username = input()
-    user.ratings(username)
+    user = User(username)
+    user.about()
+    user.ratings()
         
         
